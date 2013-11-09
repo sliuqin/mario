@@ -33,13 +33,13 @@
 </table>
 {% endblock %}
 {% block script %}
+<!--script src="/assets/jquery/mobile/1.3.2.js"></script -->
 <script>
     var socket = io.connect('{{listen}}');
-    $(".j-action-key").mousedown(function (e) {
+    $(".j-action-key").bind('tap mousedown',function (e) {
         var el = $(e.target);
-        console.log('mousedown');
         socket.emit('keydown', {key: el.data('key')});
-    }).mouseup(function (e) {
+    }).bind('taphold mouseup', function (e) {
                 var el = $(e.target);
                 socket.emit('keyup', {key: el.data('key')});
             });
