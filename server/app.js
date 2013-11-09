@@ -40,6 +40,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('keyup', function (data) {
         socket.broadcast.emit('keyup',data);
     });
+    socket.on("Hello",function(data){console.log('Hello form iphone')});
     
 });
 app.use(express.static(__dirname + '/FullScreenMario'));
