@@ -1,0 +1,51 @@
+{% extends './layout.html' %}
+{% block content %}
+<!-- Top header -->
+<div id="header">
+    <!-- <img id="beta" src="Theme/Beta.png"> -->
+    <!-- <span id="version"></span> -->
+</div>
+
+<!-- Game itself -->
+<iframe id="game" src="mario.html"></iframe>
+
+<!-- After the game (retracts as needed) -->
+<div id="after">
+
+    <!-- Level Editor popup -->
+    <div id="out_editor" class="bar1">
+        <div class="label">- Level Editor -</div>
+        <div id="in_editor" class="expander"></div>
+    </div>
+
+    <!-- Level Editor popup -->
+    <div id="out_mapselect" class="bar1">
+        <div class="label">- Map Select -</div>
+        <div id="in_mapselect" class="expander"></div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    start();
+    var socket = io.connect('{{listen}}');
+    var win = document.getElementById("game").contentWindow;
+
+
+    socket.on('keydown', function (data) {
+        var key = data.key;
+
+        var e = jQuery.Event("keydown", { keyCode: key, which: key });
+        $(win.document.body).trigger(e);
+    });
+
+    socket.on('keyup', function (data) {
+        var key = data.key;
+
+        var e = jQuery.Event("keyup", { keyCode: key, which: key });
+        $(win.document.body).trigger(e);
+    })
+
+
+</script>
+{% endblock %}

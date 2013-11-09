@@ -1,0 +1,47 @@
+{% extends './layout.html' %}
+{% block content %}
+<style>
+    body {
+        background: #ffcc33;
+    }
+
+    td {
+        width: 100px;
+        height: 100px;
+    }
+
+    #J-tb-up, #J-tb-left, #J-tb-right, #J-tb-down {
+        background-color: #2cd;
+    }
+</style>
+<table>
+    <tr>
+        <td></td>
+        <td id="J-tb-up" class="j-action-key" data-key="38"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="J-tb-left" class="j-action-key" data-key="37"></td>
+        <td></td>
+        <td id="J-tb-right" class="j-action-key" data-key="39"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td id="J-tb-down" class="j-action-key" data-key="40"></td>
+        <td></td>
+    </tr>
+</table>
+{% endblock %}
+{% block script %}
+<script>
+    var socket = io.connect('{{listen}}');
+    $(".j-action-key").mousedown(function (e) {
+        var el = $(e.target);
+        console.log('mousedown');
+        socket.emit('keydown', {key: el.data('key')});
+    }).mouseup(function (e) {
+                var el = $(e.target);
+                socket.emit('keyup', {key: el.data('key')});
+            });
+</script>
+{% endblock %}
