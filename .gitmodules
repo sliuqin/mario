@@ -1,0 +1,3 @@
+[submodule "server/FullScreenMario"]
+        path = server/FullScreenMario
+        url = git@github.com:sliuqin/FullScreenMario.git
